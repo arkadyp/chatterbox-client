@@ -4,10 +4,24 @@ var displayMessage = function(data) {
   _.each(data.results, function(message) {
     var username = message.username || 'unknown';
     var text = message.text || '';
-    console.log(username+': '+text);
-
+    appendMessage(username, text);
   });
-}
+};
+
+//appends message string to DOM
+var appendMessage = function(username, message) {
+  var $username = $('<span class="username"></span>');
+  $username.text(username);
+  
+  var $usermsg = $('<span class="usermsg"></span>');
+  $usermsg.text(message);
+  
+  var $msg = $('<div></div>');
+  $msg.append($username);
+  $msg.append(': ');
+  $msg.append($usermsg);
+  $('.chatMessages').append($msg);
+};
 
 $.ajax({
   // always use this url
